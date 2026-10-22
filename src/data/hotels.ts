@@ -22,7 +22,7 @@ export interface Hotel {
   amenities: Localized[];
   images: string[];
   address?: string;
-  phone?: string;
+  phone: string;
   email?: string;
   website?: string;
   bookingUrl?: string;
@@ -68,6 +68,7 @@ export const hotels: Hotel[] = [
       t('Senderismo y ciclismo', 'Hiking and cycling', 'Wandern und Radfahren'),
     ],
     images: img('filicumis', 6, 4, 5, 1, 2, 3, 8, 9, 7),
+    phone: GROUP_PHONE,
     website: 'https://filicumis.com/',
     bookingUrl: OCTORATE + '328744',
   },
@@ -130,6 +131,8 @@ export const hotels: Hotel[] = [
     ],
     images: img('sa-vall-de-son-macia', 1, 2, 3, 4, 5),
     address: '07509 Son Macià, Manacor',
+    phone: GROUP_PHONE,
+    website: 'http://www.savalldesonmacia.com/',
   },
   {
     slug: 'son-sampoli',
@@ -237,8 +240,8 @@ export const hotels: Hotel[] = [
     website: 'https://www.esrafalroig.com/es',
   },
   {
-    slug: 'marivent-portocolom',
-    name: 'Marivent Portocolom',
+    slug: 'mar-i-vent-portocolom',
+    name: 'Mar i Vent Portocolom',
     type: t('Apartamentos', 'Apartments', 'Apartments'),
     location: 'Portocolom',
     tagline: t(
@@ -247,9 +250,9 @@ export const hotels: Hotel[] = [
       'Apartments mit Meerblick, 100 m vom Strand.',
     ),
     description: t(
-      'Marivent está en Portocolom, a solo 100 metros de la playa y a 57 km del aeropuerto de Palma. Los apartamentos tienen zona de estar con sofá, TV de pantalla plana vía satélite, cocina totalmente equipada y baño privado. Hay una piscina con zona de relax y un campo de golf a 5 km.',
-      'Marivent is in Portocolom, just 100 metres from the beach and 57 km from Palma airport. The apartments have a seating area with a sofa, satellite flat-screen TV, a fully equipped kitchen and a private bathroom. There is a pool with a relaxation area, and a golf course 5 km away.',
-      'Marivent liegt in Portocolom, nur 100 Meter vom Strand und 57 km vom Flughafen Palma entfernt. Die Apartments verfügen über einen Wohnbereich mit Sofa, Flachbild-Sat-TV, voll ausgestattete Küche und eigenes Bad. Es gibt einen Pool mit Ruhebereich und einen Golfplatz in 5 km Entfernung.',
+      'Mar i Vent está en Portocolom, a solo 100 metros de la playa y a 57 km del aeropuerto de Palma. Los apartamentos tienen zona de estar con sofá, TV de pantalla plana vía satélite, cocina totalmente equipada y baño privado. Hay una piscina con zona de relax y un campo de golf a 5 km.',
+      'Mar i Vent is in Portocolom, just 100 metres from the beach and 57 km from Palma airport. The apartments have a seating area with a sofa, satellite flat-screen TV, a fully equipped kitchen and a private bathroom. There is a pool with a relaxation area, and a golf course 5 km away.',
+      'Mar i Vent liegt in Portocolom, nur 100 Meter vom Strand und 57 km vom Flughafen Palma entfernt. Die Apartments verfügen über einen Wohnbereich mit Sofa, Flachbild-Sat-TV, voll ausgestattete Küche und eigenes Bad. Es gibt einen Pool mit Ruhebereich und einen Golfplatz in 5 km Entfernung.',
     ),
     rooms: [
       { name: t('Apartamento con terraza y vista al mar — desde 86 €/noche', 'Apartment with terrace and sea view — from €86/night', 'Apartment mit Terrasse und Meerblick — ab 86 €/Nacht') },
@@ -262,7 +265,7 @@ export const hotels: Hotel[] = [
       t('Cocina equipada', 'Fully equipped kitchen', 'Voll ausgestattete Küche'),
       t('A 100 m de la playa', '100 m from the beach', '100 m vom Strand'),
     ],
-    images: img('marivent', 2, 5, 1, 6, 7, 8, 9, 10, 11),
+    images: img('mar-i-vent-portocolom', 2, 5, 1, 6, 7, 8, 9, 10, 11),
     address: 'Carrer de l’Assumpció 14, 07670 Portocolom',
     phone: GROUP_PHONE,
     email: 'info@mariventportocolom.com',
@@ -277,7 +280,7 @@ export const company = {
   cif: 'B06845960',
   address: 'Calle Algar 17, 07200 Felanitx, Illes Balears',
   email: 'admin@mallorcahouserent.com',
-  phone: '971 824 914',
+  phone: '+34 971 824 914',
   phoneHref: '+34971824914',
   parent: { name: 'Mallorca House Rent', url: 'https://mallorcahouserent.com/' },
 };

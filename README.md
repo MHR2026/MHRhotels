@@ -32,5 +32,16 @@ npm run build    # genera la web en dist/ (lista para Netlify, Vercel, Cloudflar
 ## Reservas
 
 Todos los establecimientos usan Octorate. El botón «Reservar» lleva al motor de Octorate
-(`bookingUrl`) o, si no está definido, a la web del hotel. Sa Vall no tiene web propia:
-su botón abre un email de consulta.
+(`bookingUrl`) o, si no está definido, a la web del hotel.
+
+## Publicación en IONOS (1&1)
+
+La web compilada (`dist/`) es HTML estático: basta con subirla al hosting.
+`public/.htaccess` configura Apache: HTTPS, idioma de la portada según el navegador,
+redirecciones de las URLs antiguas, página 404 y caché.
+
+El workflow `.github/workflows/deploy.yml` compila y sube la web por SFTP en cada cambio
+de `main`. Necesita los secretos `SFTP_HOST`, `SFTP_USER`, `SFTP_PASSWORD` y `SFTP_PATH`
+(Settings → Secrets and variables → Actions del repositorio). Conviene subirla a una
+carpeta nueva (p. ej. `/mhrhotels-web`) y, cuando esté revisada, apuntar el dominio a esa
+carpeta desde el panel de IONOS (Dominios → Destino), sin tocar el WordPress actual.

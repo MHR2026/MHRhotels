@@ -12,7 +12,8 @@ interface Props {
   image?: string;
 }
 const { lang, title, description = '', image = '/images/es-rafal-roig/1.webp' } = Astro.props;
-const path = Astro.url.pathname.replace(/^\/(es|en|de)/, '');
+const localized = /^\/(es|en|de)(\/|$)/.test(Astro.url.pathname);
+const path = localized ? Astro.url.pathname.replace(/^\/(es|en|de)/, '') : '/';
 ---
 <!doctype html>
 <html lang={lang}>

@@ -4,7 +4,8 @@ import type { Lang } from '../data/hotels';
 
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
-const path = Astro.url.pathname.replace(/^\/(es|en|de)/, '');
+const localized = /^\/(es|en|de)(\/|$)/.test(Astro.url.pathname);
+const path = localized ? Astro.url.pathname.replace(/^\/(es|en|de)/, '') : '/';
 const links = [
   ['#nosotros', t('nav.about')],
   ['#servicios', t('nav.services')],
