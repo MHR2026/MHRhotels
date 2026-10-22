@@ -1,0 +1,161 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { company, hotels, type Lang } from '../../../data/hotels';
+import { langPaths, useTranslations } from '../../../i18n/ui';
+import { owners } from '../../../i18n/owners';
+
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+const o = owners[lang];
+const f = o.form;
+const icons = [
+  'M3 3v18h18M7 15l4-4 3 3 5-6',
+  'M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z',
+  'M4 5h16v11H4zM8 20h8M12 16v4',
+  'M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11zM12 12a2 2 0 100-4 2 2 0 000 4z',
+];
+const input = 'mt-1 w-full rounded-lg border border-sand-200 bg-white px-4 py-3 text-base focus:border-sea focus:outline-none focus:ring-2 focus:ring-sea/20';
+const label = 'block text-sm font-medium';
+---
+<Base lang={lang} title={o.metaTitle} description={o.metaDescription} image="/images/son-sampoli/5.webp">
+  <section class="relative isolate overflow-hidden text-sand-50">
+    <img src="/images/son-sampoli/5.webp" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" fetchpriority="high" />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-sea-dark/95 via-sea-dark/75 to-sea-dark/30"></div>
+    <div class="mx-auto max-w-6xl px-4 py-28 sm:py-36">
+      <p class="text-sm uppercase tracking-[0.3em] text-sand-200">{o.kicker}</p>
+      <h1 class="mt-4 max-w-3xl text-4xl leading-tight sm:text-6xl">{o.title}</h1>
+      <p class="mt-6 max-w-xl text-lg text-sand-100/90">{o.subtitle}</p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="#formulario" class="rounded-full bg-sand-50 px-7 py-3 text-sm font-medium text-sea-dark hover:bg-sand-100">{o.cta}</a>
+        <a href={`tel:${company.phoneHref}`} class="rounded-full border border-sand-50/70 px-7 py-3 text-sm font-medium hover:bg-sand-50/10">{company.phone}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-24">
+    <h2 class="text-4xl text-sea-dark sm:text-5xl">{o.benefitsTitle}</h2>
+    <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {o.benefits.map((b, i) => (
+        <div>
+          <svg viewBox="0 0 24 24" class="h-9 w-9 text-teal" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[i]} /></svg>
+          <h3 class="mt-4 text-2xl text-sea-dark">{b.title}</h3>
+          <p class="mt-2 leading-relaxed text-stone-ink/75">{b.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-sand-100">
+    <div class="mx-auto max-w-6xl px-4 py-24">
+      <h2 class="text-4xl text-sea-dark sm:text-5xl">{o.modesTitle}</h2>
+      <p class="mt-4 text-lg text-stone-ink/75">{o.modesSubtitle}</p>
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {o.modes.map((m, i) => (
+          <div class="rounded-xl bg-white p-8 ring-1 ring-sand-200">
+            <p class="font-serif text-5xl text-teal">0{i + 1}</p>
+            <h3 class="mt-4 text-2xl text-sea-dark">{m.title}</h3>
+            <p class="mt-3 leading-relaxed text-stone-ink/75">{m.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-12 flex flex-wrap items-center gap-3">
+        <span class="text-sm font-medium uppercase tracking-widest text-terracotta">{o.forTitle}</span>
+        {o.forList.map((x) => <span class="rounded-full bg-white px-4 py-1.5 text-sm ring-1 ring-sand-200">{x}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-24">
+    <h2 class="text-4xl text-sea-dark sm:text-5xl">{o.stepsTitle}</h2>
+    <ol class="mt-12 grid gap-8 md:grid-cols-4">
+      {o.steps.map((s, i) => (
+        <li class="border-t-2 border-teal pt-5">
+          <p class="text-sm font-medium text-teal">{i + 1}</p>
+          <h3 class="mt-1 text-xl text-sea-dark">{s.title}</h3>
+          <p class="mt-2 text-stone-ink/75">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="bg-sea-dark text-sand-50">
+    <div class="mx-auto max-w-6xl px-4 py-24">
+      <h2 class="text-4xl sm:text-5xl">{o.portfolioTitle}</h2>
+      <p class="mt-4 text-lg text-sand-200">{o.portfolioSubtitle}</p>
+      <div class="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
+        {hotels.map((h) => (
+          <a href={`/${lang}/establecimientos/${h.slug}/`} class="group relative block overflow-hidden rounded-xl">
+            <img src={h.images[0]} alt={h.name} loading="lazy" class="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+            <div class="absolute bottom-0 p-4">
+              <p class="text-xs uppercase tracking-widest text-sand-200">{h.location}</p>
+              <p class="font-serif text-xl">{h.name}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-6xl gap-16 px-4 py-24 lg:grid-cols-[1fr_1.2fr]">
+    <div>
+      <h2 class="text-4xl text-sea-dark sm:text-5xl">{o.faqTitle}</h2>
+      <div class="mt-8 divide-y divide-sand-200 border-y border-sand-200">
+        {o.faq.map((q) => (
+          <details class="group py-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg">
+              {q.title}<span class="text-teal transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-3 text-stone-ink/75">{q.text}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <div id="formulario" class="scroll-mt-24 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-sand-200 sm:p-10">
+      <h2 class="text-3xl text-sea-dark sm:text-4xl">{f.title}</h2>
+      <p class="mt-2 text-stone-ink/70">{f.subtitle}</p>
+      <p id="form-error" hidden class="mt-6 rounded-lg bg-terracotta/10 px-4 py-3 text-sm text-terracotta">
+        {f.error} <a class="underline" href={`mailto:${company.email}`}>{company.email}</a>
+      </p>
+      <form action="/api/propietarios.php" method="post" class="mt-8 grid gap-5 sm:grid-cols-2">
+        <input type="hidden" name="lang" value={lang} />
+        <div class="hidden" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <label class={label}>{f.name} *<input class={input} name="name" required autocomplete="name" /></label>
+        <label class={label}>{f.email} *<input class={input} name="email" type="email" required autocomplete="email" /></label>
+        <label class={label}>{f.phone}<input class={input} name="phone" type="tel" autocomplete="tel" /></label>
+        <label class={label}>{f.location}<input class={input} name="location" /></label>
+        <label class={label}>{f.type}
+          <select class={input} name="type">{f.types.map((x) => <option>{x}</option>)}</select>
+        </label>
+        <label class={label}>{f.units}<input class={input} name="units" inputmode="numeric" /></label>
+        <label class:list={[label, 'sm:col-span-2']}>{f.status}
+          <select class={input} name="status">{f.statuses.map((x) => <option>{x}</option>)}</select>
+        </label>
+        <fieldset class="sm:col-span-2">
+          <legend class={label}>{f.interest}</legend>
+          <div class="mt-2 flex flex-wrap gap-3">
+            {o.modes.map((m) => (
+              <label class="flex items-center gap-2 rounded-full border border-sand-200 px-4 py-2 text-sm has-[:checked]:border-sea has-[:checked]:bg-sea/5">
+                <input type="checkbox" name="interest[]" value={m.title} class="accent-sea" />{m.title}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+        <label class:list={[label, 'sm:col-span-2']}>{f.message}
+          <textarea class={input} name="message" rows="4" placeholder={f.messagePlaceholder}></textarea>
+        </label>
+        <label class="flex items-start gap-3 text-sm sm:col-span-2">
+          <input type="checkbox" name="consent" value="1" required class="mt-1 accent-sea" />
+          <span>{f.consent} <a href={`/${lang}/legal/`} target="_blank" class="text-sea underline">{f.consentLink}</a> *</span>
+        </label>
+        <button type="submit" class="rounded-full bg-sea px-8 py-3 font-medium text-sand-50 hover:bg-sea-dark sm:col-span-2 sm:justify-self-start">{f.submit}</button>
+      </form>
+    </div>
+  </section>
+
+  <script is:inline>
+    if (new URLSearchParams(location.search).has('error')) document.getElementById('form-error').hidden = false;
+  </script>
+</Base>

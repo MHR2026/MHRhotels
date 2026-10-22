@@ -1,6 +1,7 @@
 ---
 import { languages, useTranslations } from '../i18n/ui';
 import type { Lang } from '../data/hotels';
+import { owners } from '../i18n/owners';
 
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
@@ -23,6 +24,7 @@ const links = [
       {links.map(([href, label]) => (
         <a href={`/${lang}/${href}`} class="hidden hover:text-sea lg:inline">{label}</a>
       ))}
+      <a href={`/${lang}/propietarios/`} class="rounded-full bg-sea px-4 py-2 text-xs font-medium text-sand-50 hover:bg-sea-dark sm:text-sm">{owners[lang].nav}</a>
       <div class="flex gap-1 text-xs uppercase">
         {(Object.keys(languages) as Lang[]).map((l) => (
           <a href={`/${l}${path}`} hreflang={l} aria-label={languages[l]}

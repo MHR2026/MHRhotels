@@ -36,6 +36,7 @@ const path = localized ? Astro.url.pathname.replace(/^\/(es|en|de)/, '') : '/';
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <slot name="head" />
   </head>
   <body>
     <Header lang={lang} />

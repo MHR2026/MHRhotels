@@ -1,0 +1,19 @@
+---
+import Base from '../../../layouts/Base.astro';
+import type { Lang } from '../../../data/hotels';
+import { langPaths } from '../../../i18n/ui';
+import { owners } from '../../../i18n/owners';
+
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const o = owners[lang].thanks;
+---
+<Base lang={lang} title={`${o.title} · MHR Hotels`}>
+  <meta name="robots" content="noindex" slot="head" />
+  <section class="mx-auto max-w-2xl px-4 py-32 text-center">
+    <svg viewBox="0 0 24 24" class="mx-auto h-16 w-16 text-teal" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M7 12.5l3 3 7-7" /></svg>
+    <h1 class="mt-6 text-4xl text-sea-dark">{o.title}</h1>
+    <p class="mt-4 text-lg text-stone-ink/75">{o.text}</p>
+    <a href={`/${lang}/`} class="mt-10 inline-block rounded-full bg-sea px-7 py-3 text-sm font-medium text-sand-50">{o.back}</a>
+  </section>
+</Base>

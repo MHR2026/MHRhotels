@@ -3,10 +3,12 @@ import Base from '../../layouts/Base.astro';
 import HotelCard from '../../components/HotelCard.astro';
 import { company, hotels, type Lang } from '../../data/hotels';
 import { langPaths, useTranslations } from '../../i18n/ui';
+import { owners } from '../../i18n/owners';
 
 export const getStaticPaths = langPaths;
 const lang = Astro.params.lang as Lang;
 const t = useTranslations(lang);
+const band = owners[lang].band;
 
 const services = [
   { key: 'marketing', icon: 'M3 3v18h18M7 15l4-4 3 3 5-6' },
@@ -24,7 +26,7 @@ const services = [
       <p class="mt-6 max-w-xl text-lg text-sand-100/90">{t('hero.subtitle')}</p>
       <div class="mt-10 flex flex-wrap gap-3">
         <a href="#establecimientos" class="rounded-full bg-sand-50 px-7 py-3 text-sm font-medium text-sea-dark hover:bg-sand-100">{t('hero.cta')}</a>
-        <a href="#contacto" class="rounded-full border border-sand-50/70 px-7 py-3 text-sm font-medium hover:bg-sand-50/10">{t('hero.contact')}</a>
+        <a href={`/${lang}/propietarios/`} class="rounded-full border border-sand-50/70 px-7 py-3 text-sm font-medium hover:bg-sand-50/10">{owners[lang].nav} →</a>
       </div>
     </div>
   </section>
@@ -55,6 +57,17 @@ const services = [
         ))}
       </div>
       <p class="mt-10 max-w-2xl text-lg text-stone-ink/80">{t('services.closing')}</p>
+    </div>
+  </section>
+
+  <section class="relative isolate overflow-hidden bg-sea-dark text-sand-50">
+    <img src="/images/filicumis/6.webp" alt="" loading="lazy" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-30" />
+    <div class="mx-auto flex max-w-6xl flex-col items-start gap-8 px-4 py-20 md:flex-row md:items-center md:justify-between">
+      <div class="max-w-2xl">
+        <h2 class="text-4xl sm:text-5xl">{band.title}</h2>
+        <p class="mt-4 text-lg text-sand-100/90">{band.text}</p>
+      </div>
+      <a href={`/${lang}/propietarios/`} class="shrink-0 rounded-full bg-sand-50 px-8 py-4 text-sm font-medium text-sea-dark hover:bg-sand-100">{band.cta} →</a>
     </div>
   </section>
 

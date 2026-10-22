@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from '../i18n/ui';
 import { company, hotels, type Lang } from '../data/hotels';
+import { owners } from '../i18n/owners';
 
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
@@ -20,6 +21,7 @@ const t = useTranslations(lang);
       <p><a class="hover:underline" href={`tel:${company.phoneHref}`}>{company.phone}</a></p>
     </address>
     <ul class="space-y-1 text-sm">
+      <li><a class="font-medium hover:underline" href={`/${lang}/propietarios/`}>{owners[lang].nav} →</a></li>
       <li><a class="hover:underline" href={`/${lang}/legal/`}>{t('footer.legal')}</a></li>
       <li><a class="hover:underline" href={`/${lang}/accesibilidad/`}>{t('footer.a11y')}</a></li>
     </ul>
