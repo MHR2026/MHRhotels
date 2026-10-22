@@ -35,7 +35,9 @@ jobs:
           SFTP_PATH: ${{ secrets.SFTP_PATH }}
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-          lftp -u "$SFTP_USER","$SFTP_PASSWORD" "sftp://$SFTP_HOST" -e "
+          # La contraseña se pasa por variable de entorno para que no la rompan comas o símbolos
+          export LFTP_PASSWORD="$SFTP_PASSWORD"
+          lftp --env-password -u "$SFTP_USER" "sftp://$SFTP_HOST:22" -e "
             set sftp:auto-confirm yes;
             mirror --reverse --delete --verbose dist/ '$SFTP_PATH';
             bye"
