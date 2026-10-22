@@ -15,7 +15,6 @@ const { hotel } = Astro.props;
 const lang = Astro.params.lang as Lang;
 const t = useTranslations(lang);
 const email = hotel.email ?? company.email;
-const phone = hotel.phone ?? company.phone;
 const bookingUrl = hotel.bookingUrl ?? hotel.website;
 const others = hotels.filter((h) => h.slug !== hotel.slug).slice(0, 3);
 ---
@@ -57,7 +56,7 @@ const others = hotels.filter((h) => h.slug !== hotel.slug).slice(0, 3);
       <p class="font-serif text-2xl">{hotel.name}</p>
       <dl class="mt-4 space-y-3 text-sm">
         {hotel.address && <div><dt class="text-xs uppercase tracking-widest text-stone-ink/50">{t('contact.address')}</dt><dd>{hotel.address}</dd></div>}
-        <div><dt class="text-xs uppercase tracking-widest text-stone-ink/50">{t('contact.phone')}</dt><dd><a class="hover:text-sea" href={`tel:${phone.replace(/\s/g, '')}`}>{phone}</a></dd></div>
+        <div><dt class="text-xs uppercase tracking-widest text-stone-ink/50">{t('contact.phone')}</dt>{hotel.phones.map((phone) => <dd><a class="hover:text-sea" href={`tel:${phone.replace(/\s/g, '')}`}>{phone}</a></dd>)}</div>
         <div><dt class="text-xs uppercase tracking-widest text-stone-ink/50">{t('contact.email')}</dt><dd><a class="break-all hover:text-sea" href={`mailto:${email}`}>{email}</a></dd></div>
       </dl>
       {bookingUrl ? (

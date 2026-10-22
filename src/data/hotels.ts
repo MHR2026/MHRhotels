@@ -22,7 +22,7 @@ export interface Hotel {
   amenities: Localized[];
   images: string[];
   address?: string;
-  phone: string;
+  phones: string[];
   email?: string;
   website?: string;
   bookingUrl?: string;
@@ -68,7 +68,8 @@ export const hotels: Hotel[] = [
       t('Senderismo y ciclismo', 'Hiking and cycling', 'Wandern und Radfahren'),
     ],
     images: img('filicumis', 6, 4, 5, 1, 2, 3, 8, 9, 7),
-    phone: GROUP_PHONE,
+    phones: [GROUP_PHONE],
+    email: 'booking@filicumis.com',
     website: 'https://filicumis.com/',
     bookingUrl: OCTORATE + '328744',
   },
@@ -100,8 +101,8 @@ export const hotels: Hotel[] = [
     ],
     images: img('martorell', 7, 1, 2, 3, 4, 5, 6),
     address: 'Carrer Cervantes 2, 07638 Ses Salines',
-    phone: GROUP_PHONE,
-    email: 'info@mhrhotels.com',
+    phones: ['+34 971 655 030', GROUP_PHONE],
+    email: 'hotel@hotelmartorell.com',
     website: 'https://www.hotelmartorell.com/es',
   },
   {
@@ -133,7 +134,8 @@ export const hotels: Hotel[] = [
     ],
     images: img('sa-vall-de-son-macia', 1, 7, 6, 8, 2, 9, 10, 3, 4, 5),
     address: '07509 Son Macià, Manacor',
-    phone: GROUP_PHONE,
+    phones: [GROUP_PHONE],
+    email: 'info@savalldesonmacia.com',
     website: 'http://www.savalldesonmacia.com/',
   },
   {
@@ -165,7 +167,7 @@ export const hotels: Hotel[] = [
     ],
     images: img('son-sampoli', 5, 1, 2, 3, 4, 6, 8),
     address: 'Camí de Son Pons 16, 07620 Llucmajor',
-    phone: GROUP_PHONE,
+    phones: ['+34 646 87 02 97', GROUP_PHONE],
     email: 'info@mhrhotels.com',
     website: 'https://www.sonsampoli.com/es',
   },
@@ -200,7 +202,7 @@ export const hotels: Hotel[] = [
     ],
     images: img('son-sampoli-suites', 3, 4, 2),
     address: 'Camí de Binificat, buzón 38, 07620 Llucmajor',
-    phone: GROUP_PHONE,
+    phones: ['+34 646 87 02 97', GROUP_PHONE],
     email: 'info@mhrhotels.com',
     website: 'https://www.suites.sonsampoli.com/es',
   },
@@ -237,7 +239,7 @@ export const hotels: Hotel[] = [
     ],
     images: img('es-rafal-roig', 1, 4, 2, 3),
     address: 'Es Rafal Roig, 07500 Manacor',
-    phone: GROUP_PHONE,
+    phones: [GROUP_PHONE],
     email: 'info@esrafalroig.com',
     website: 'https://www.esrafalroig.com/es',
   },
@@ -269,7 +271,7 @@ export const hotels: Hotel[] = [
     ],
     images: img('mar-i-vent-portocolom', 2, 5, 1, 6, 7, 8, 9, 10, 11),
     address: 'Carrer de l’Assumpció 14, 07670 Portocolom',
-    phone: GROUP_PHONE,
+    phones: [GROUP_PHONE],
     email: 'info@mariventportocolom.com',
     website: 'https://www.mariventportocolom.com/index-es.html',
     bookingUrl: OCTORATE + '589470',
