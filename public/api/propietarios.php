@@ -3,7 +3,7 @@
 // Se ejecuta en el hosting de IONOS (PHP). Sin JavaScript: redirige a la página
 // de gracias o vuelve al formulario con ?error=1.
 
-const TO = 'admin@mallorcahouserent.com';
+const TO = 'admin@mhrhotels.com';
 const FROM = 'web@mhrhotels.com';
 const LANGS = ['es', 'en', 'de'];
 
