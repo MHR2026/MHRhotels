@@ -4,3 +4,5 @@ dist/
 .DS_Store
 docs-preview/
 *.zip
+public/api/config.php
+mhr-form-config.php

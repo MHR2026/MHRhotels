@@ -56,3 +56,8 @@ carpeta desde el panel de IONOS (Dominios → Destino), sin tocar el WordPress a
 `admin@mhrhotels.com` (constante `TO`) con remitente `admin@mhrhotels.com` (`FROM`, debe ser un buzón existente del dominio).
 Necesita PHP en el hosting (IONOS lo incluye). Lleva un campo trampa contra bots y
 redirige a `/<idioma>/propietarios/gracias/`.
+
+Envío fiable por el correo de IONOS: copiar `public/api/config.sample.php` como
+`mhr-form-config.php` en la carpeta que contiene la web (un nivel por encima), con la
+contraseña del buzón. Sin ese fichero se usa `mail()`.
+Diagnóstico: `/api/propietarios.php?check=1`. Errores: `api/errores.log` (bloqueado desde la web).

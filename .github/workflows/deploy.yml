@@ -48,7 +48,7 @@ jobs:
           lftp --env-password -u "$SFTP_USER" "sftp://$SFTP_HOST:22" -e "
             set sftp:auto-confirm yes;
             debug 3;
-            mirror --reverse --delete --verbose dist/ '$SFTP_PATH';
+            mirror --reverse --delete --verbose --exclude-glob api/config.php --exclude-glob api/errores.log dist/ '$SFTP_PATH';
             bye"
     env:
       SFTP_HOST: ${{ secrets.SFTP_HOST }}
