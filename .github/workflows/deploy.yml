@@ -35,10 +35,19 @@ jobs:
           SFTP_PATH: ${{ secrets.SFTP_PATH }}
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          # Comprobaciones de formato (no muestran la contraseña)
+          check() { case "$2" in " "*|*" ") echo "AVISO: $1 tiene espacios al principio o al final";; esac; }
+          check SFTP_HOST "$SFTP_HOST"; check SFTP_USER "$SFTP_USER"; check SFTP_PASSWORD "$SFTP_PASSWORD"; check SFTP_PATH "$SFTP_PATH"
+          case "$SFTP_HOST" in *://*|*/*|*:*) echo "AVISO: SFTP_HOST debe ser solo el nombre del servidor, sin sftp:// ni puerto";; esac
+          case "$SFTP_USER" in *@*) echo "AVISO: SFTP_USER parece un email; debe ser el usuario SFTP de IONOS";; esac
+          echo "Longitud del usuario: ${#SFTP_USER} caracteres"
+          echo "Servidor responde en el puerto 22:"; timeout 10 bash -c "head -c 40 < /dev/tcp/$SFTP_HOST/22" || echo "  no responde"
+          echo
           # La contraseña se pasa por variable de entorno para que no la rompan comas o símbolos
           export LFTP_PASSWORD="$SFTP_PASSWORD"
           lftp --env-password -u "$SFTP_USER" "sftp://$SFTP_HOST:22" -e "
             set sftp:auto-confirm yes;
+            debug 3;
             mirror --reverse --delete --verbose dist/ '$SFTP_PATH';
             bye"
     env:
