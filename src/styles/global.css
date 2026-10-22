@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --color-sand-50: #faf7f2;
+  --color-sand-100: #f2ece1;
+  --color-sand-200: #e4d8c3;
+  --color-stone-ink: #2b2a27;
+  --color-sea: #1f4e5f;
+  --color-sea-dark: #163a47;
+  --color-terracotta: #b8673f;
+}
+
+html { scroll-behavior: smooth; }
+body { @apply bg-sand-50 text-stone-ink font-sans antialiased; }
+h1, h2, h3 { @apply font-serif; }

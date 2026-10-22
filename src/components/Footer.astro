@@ -1,0 +1,26 @@
+---
+import { useTranslations } from '../i18n/ui';
+import { hotels, type Lang } from '../data/hotels';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<footer class="mt-24 bg-sea-dark text-sand-100">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-3">
+    <div>
+      <p class="font-serif text-2xl">MHR Hotels</p>
+      <p class="mt-2 text-sm text-sand-200">Mallorca</p>
+    </div>
+    <ul class="space-y-1 text-sm">
+      {hotels.map((h) => <li><a class="hover:underline" href={`/${lang}/hoteles/${h.slug}/`}>{h.name}</a></li>)}
+    </ul>
+    <ul class="space-y-1 text-sm">
+      <li><a class="hover:underline" href="#">{t('footer.legal')}</a></li>
+      <li><a class="hover:underline" href="#">{t('footer.privacy')}</a></li>
+      <li><a class="hover:underline" href="#">{t('footer.cookies')}</a></li>
+    </ul>
+  </div>
+  <p class="border-t border-white/10 py-5 text-center text-xs text-sand-200">
+    © {new Date().getFullYear()} MHR Hotels. {t('footer.rights')}
+  </p>
+</footer>

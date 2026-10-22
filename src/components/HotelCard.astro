@@ -1,0 +1,21 @@
+---
+import HotelImage from './HotelImage.astro';
+import { useTranslations } from '../i18n/ui';
+import type { Hotel, Lang } from '../data/hotels';
+
+const { hotel, lang } = Astro.props as { hotel: Hotel; lang: Lang };
+const t = useTranslations(lang);
+---
+<article class="group overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-sand-200 transition hover:shadow-lg">
+  <a href={`/${lang}/hoteles/${hotel.slug}/`} class="block">
+    <HotelImage hotel={hotel} class="aspect-[4/3] w-full transition duration-500 group-hover:scale-[1.03]" />
+    <div class="p-5">
+      <p class="text-xs uppercase tracking-widest text-terracotta">
+        {hotel.location}{hotel.adultsOnly && ` · ${t('hotels.adultsOnly')}`}
+      </p>
+      <h3 class="mt-1 text-2xl">{hotel.name}</h3>
+      {hotel.tagline && <p class="mt-2 text-sm text-stone-ink/70">{hotel.tagline[lang]}</p>}
+      <span class="mt-4 inline-block text-sm font-medium text-sea">{t('cta.discover')} →</span>
+    </div>
+  </a>
+</article>

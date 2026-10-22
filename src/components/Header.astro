@@ -1,0 +1,24 @@
+---
+import { languages, useTranslations } from '../i18n/ui';
+import type { Lang } from '../data/hotels';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+const path = Astro.url.pathname.replace(/^\/(es|en|de)/, '');
+---
+<header class="sticky top-0 z-40 border-b border-sand-200 bg-sand-50/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+    <a href={`/${lang}/`} class="font-serif text-2xl tracking-wide text-sea">MHR Hotels</a>
+    <nav class="flex items-center gap-5 text-sm">
+      <a href={`/${lang}/#hoteles`} class="hidden hover:text-sea sm:inline">{t('nav.hotels')}</a>
+      <a href={`/${lang}/#nosotros`} class="hidden hover:text-sea sm:inline">{t('nav.about')}</a>
+      <a href={`/${lang}/#contacto`} class="hidden hover:text-sea sm:inline">{t('nav.contact')}</a>
+      <div class="flex gap-2 text-xs uppercase">
+        {(Object.keys(languages) as Lang[]).map((l) => (
+          <a href={`/${l}${path}`} aria-label={languages[l]}
+             class:list={['rounded px-1.5 py-0.5', l === lang ? 'bg-sea text-sand-50' : 'hover:text-sea']}>{l}</a>
+        ))}
+      </div>
+    </nav>
+  </div>
+</header>
