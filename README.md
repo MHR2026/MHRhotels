@@ -39,8 +39,10 @@ Todos los establecimientos usan Octorate. El botón «Reservar» lleva al motor 
 ## Publicación en IONOS (1&1)
 
 La web compilada (`dist/`) es HTML estático: basta con subirla al hosting.
-`public/.htaccess` configura Apache: HTTPS, idioma de la portada según el navegador,
-redirecciones de las URLs antiguas, página 404 y caché.
+`public/.htaccess` configura Apache: fuerza `https://mhrhotels.com` (sin www), idioma de la portada
+según el navegador, redirecciones de las URLs antiguas de WordPress, página 404, cabeceras de
+seguridad, caché y `noindex` en cualquier subdominio de pruebas. Incluye `sitemap.xml` y `robots.txt`.
+Las fuentes se sirven desde el propio servidor (sin Google Fonts).
 
 El workflow `.github/workflows/deploy.yml` compila y sube la web por SFTP en cada cambio
 de `main`. Necesita los secretos `SFTP_HOST`, `SFTP_USER`, `SFTP_PASSWORD` y `SFTP_PATH`

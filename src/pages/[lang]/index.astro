@@ -18,6 +18,18 @@ const services = [
 const why = ['why.1', 'why.2', 'why.3', 'why.4', 'why.5'] as const;
 ---
 <Base lang={lang} title={t('meta.title')} description={t('meta.description')} image="/images/es-rafal-roig/1.webp">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: company.name,
+    legalName: company.legalName,
+    url: 'https://mhrhotels.com/',
+    logo: 'https://mhrhotels.com/images/mhr/logo-redondo.png',
+    email: company.email,
+    telephone: company.phoneHref,
+    address: { '@type': 'PostalAddress', streetAddress: 'Calle Algar 17', postalCode: '07200', addressLocality: 'Felanitx', addressRegion: 'Illes Balears', addressCountry: 'ES' },
+    areaServed: 'Mallorca',
+  })} />
   <section class="relative isolate flex min-h-[78vh] items-end overflow-hidden text-sand-50">
     <img src="/images/filicumis/4.webp" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover" fetchpriority="high" />
     <div class="absolute inset-0 -z-10 bg-gradient-to-t from-sea-dark/90 via-sea-dark/45 to-sea-dark/10"></div>

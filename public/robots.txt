@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /api/
+Disallow: /es/propietarios/gracias/
+Disallow: /en/propietarios/gracias/
+Disallow: /de/propietarios/gracias/
+
+Sitemap: https://mhrhotels.com/sitemap.xml
