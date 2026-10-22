@@ -1,0 +1,95 @@
+---
+import Base from '../../../layouts/Base.astro';
+import HotelImage from '../../../components/HotelImage.astro';
+import HotelCard from '../../../components/HotelCard.astro';
+import { company, hotels, type Lang } from '../../../data/hotels';
+import { languages, useTranslations } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return (Object.keys(languages) as Lang[]).flatMap((lang) =>
+    hotels.map((hotel) => ({ params: { lang, slug: hotel.slug }, props: { hotel } })),
+  );
+}
+
+const { hotel } = Astro.props;
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+const email = hotel.email ?? company.email;
+const phone = hotel.phone ?? company.phone;
+const bookingUrl = hotel.bookingUrl ?? hotel.website;
+const others = hotels.filter((h) => h.slug !== hotel.slug).slice(0, 3);
+---
+<Base lang={lang} title={`${hotel.name} · ${hotel.location} · MHR Hotels`} description={hotel.tagline[lang]} image={hotel.images[0]}>
+  <section class="relative isolate flex min-h-[65vh] items-end text-sand-50">
+    <HotelImage hotel={hotel} eager class="absolute inset-0 -z-20 h-full w-full" />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-sea-dark/85 via-sea-dark/30 to-transparent"></div>
+    <div class="mx-auto w-full max-w-6xl px-4 pb-14 pt-32">
+      <a href={`/${lang}/#establecimientos`} class="text-sm text-sand-100 hover:underline">← {t('hotel.back')}</a>
+      <p class="mt-6 text-xs uppercase tracking-[0.3em] text-sand-200">
+        {hotel.type[lang]} · {hotel.location}{hotel.adultsOnly && ` · ${t('hotels.adultsOnly')}`}
+      </p>
+      <h1 class="mt-2 text-5xl sm:text-6xl">{hotel.name}</h1>
+      <p class="mt-4 max-w-2xl text-lg text-sand-100/90">{hotel.tagline[lang]}</p>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-6xl gap-12 px-4 py-16 lg:grid-cols-[1fr_340px]">
+    <div>
+      <p class="text-lg leading-relaxed text-stone-ink/85">{hotel.description[lang]}</p>
+
+      <h2 class="mt-14 text-3xl text-sea-dark">{t('hotel.rooms')}</h2>
+      <ul class="mt-5 divide-y divide-sand-200 border-y border-sand-200">
+        {hotel.rooms.map((r) => (
+          <li class="flex items-baseline justify-between gap-4 py-3">
+            <span>{r.name[lang]}</span>
+            {r.size && <span class="shrink-0 text-sm text-stone-ink/60">{r.size}</span>}
+          </li>
+        ))}
+      </ul>
+
+      <h2 class="mt-14 text-3xl text-sea-dark">{t('hotel.amenities')}</h2>
+      <ul class="mt-5 flex flex-wrap gap-2">
+        {hotel.amenities.map((a) => <li class="rounded-full bg-sand-100 px-4 py-1.5 text-sm">{a[lang]}</li>)}
+      </ul>
+    </div>
+
+    <aside class="h-fit rounded-xl bg-white p-6 shadow-sm ring-1 ring-sand-200 lg:sticky lg:top-24">
+      <p class="font-serif text-2xl">{hotel.name}</p>
+      <dl class="mt-4 space-y-3 text-sm">
+        {hotel.address && <div><dt class="text-xs uppercase tracking-widest text-stone-ink/50">{t('contact.address')}</dt><dd>{hotel.address}</dd></div>}
+        <div><dt class="text-xs uppercase tracking-widest text-stone-ink/50">{t('contact.phone')}</dt><dd><a class="hover:text-sea" href={`tel:${phone.replace(/\s/g, '')}`}>{phone}</a></dd></div>
+        <div><dt class="text-xs uppercase tracking-widest text-stone-ink/50">{t('contact.email')}</dt><dd><a class="break-all hover:text-sea" href={`mailto:${email}`}>{email}</a></dd></div>
+      </dl>
+      {bookingUrl ? (
+        <a href={bookingUrl} target="_blank" rel="noopener"
+           class="mt-6 block rounded-full bg-sea px-6 py-3 text-center text-sm font-medium text-sand-50 hover:bg-sea-dark">{t('cta.book')}</a>
+      ) : (
+        <a href={`mailto:${email}?subject=${encodeURIComponent(hotel.name)}`}
+           class="mt-6 block rounded-full bg-sea px-6 py-3 text-center text-sm font-medium text-sand-50 hover:bg-sea-dark">{t('cta.ask')}</a>
+      )}
+      {hotel.website && (
+        <a href={hotel.website} target="_blank" rel="noopener" class="mt-3 block text-center text-sm text-sea hover:underline">{t('cta.website')} ↗</a>
+      )}
+    </aside>
+  </section>
+
+  {hotel.images.length > 1 && (
+    <section class="mx-auto max-w-6xl px-4">
+      <h2 class="text-3xl text-sea-dark">{t('hotel.gallery')}</h2>
+      <div class="mt-6 grid auto-rows-[160px] grid-cols-2 gap-3 sm:auto-rows-[220px] md:grid-cols-3">
+        {hotel.images.slice(1).map((src, i) => (
+          <a href={src} target="_blank" class:list={['block overflow-hidden rounded-lg', i === 0 && 'col-span-2 row-span-2']}>
+            <img src={src} alt={`${hotel.name} — ${i + 2}`} loading="lazy" decoding="async" class="h-full w-full object-cover transition duration-500 hover:scale-[1.03]" />
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="mx-auto max-w-6xl px-4 pt-24">
+    <h2 class="text-3xl text-sea-dark">{t('hotel.others')}</h2>
+    <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {others.map((h) => <HotelCard hotel={h} lang={lang} />)}
+    </div>
+  </section>
+</Base>

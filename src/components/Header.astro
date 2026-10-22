@@ -5,18 +5,28 @@ import type { Lang } from '../data/hotels';
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
 const path = Astro.url.pathname.replace(/^\/(es|en|de)/, '');
+const links = [
+  ['#nosotros', t('nav.about')],
+  ['#servicios', t('nav.services')],
+  ['#establecimientos', t('nav.hotels')],
+  ['#contacto', t('nav.contact')],
+];
 ---
 <header class="sticky top-0 z-40 border-b border-sand-200 bg-sand-50/90 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-    <a href={`/${lang}/`} class="font-serif text-2xl tracking-wide text-sea">MHR Hotels</a>
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+    <a href={`/${lang}/`} class="flex items-center gap-3" aria-label="MHR Hotels">
+      <img src="/images/mhr/logo-redondo.png" alt="" width="44" height="44" class="h-11 w-11" />
+      <span class="hidden font-serif text-xl tracking-wide text-sea-dark sm:inline">MHR Hotels</span>
+    </a>
     <nav class="flex items-center gap-5 text-sm">
-      <a href={`/${lang}/#hoteles`} class="hidden hover:text-sea sm:inline">{t('nav.hotels')}</a>
-      <a href={`/${lang}/#nosotros`} class="hidden hover:text-sea sm:inline">{t('nav.about')}</a>
-      <a href={`/${lang}/#contacto`} class="hidden hover:text-sea sm:inline">{t('nav.contact')}</a>
-      <div class="flex gap-2 text-xs uppercase">
+      {links.map(([href, label]) => (
+        <a href={`/${lang}/${href}`} class="hidden hover:text-sea lg:inline">{label}</a>
+      ))}
+      <div class="flex gap-1 text-xs uppercase">
         {(Object.keys(languages) as Lang[]).map((l) => (
-          <a href={`/${l}${path}`} aria-label={languages[l]}
-             class:list={['rounded px-1.5 py-0.5', l === lang ? 'bg-sea text-sand-50' : 'hover:text-sea']}>{l}</a>
+          <a href={`/${l}${path}`} hreflang={l} aria-label={languages[l]}
+             aria-current={l === lang ? 'true' : undefined}
+             class:list={['rounded px-2 py-1', l === lang ? 'bg-sea text-sand-50' : 'hover:text-sea']}>{l}</a>
         ))}
       </div>
     </nav>

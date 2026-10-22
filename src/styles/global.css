@@ -7,11 +7,23 @@
   --color-sand-100: #f2ece1;
   --color-sand-200: #e4d8c3;
   --color-stone-ink: #2b2a27;
-  --color-sea: #1f4e5f;
-  --color-sea-dark: #163a47;
+  --color-sea: #23786f;
+  --color-sea-dark: #17403c;
   --color-terracotta: #b8673f;
+  --color-teal: #4db8ac;
 }
 
 html { scroll-behavior: smooth; }
 body { @apply bg-sand-50 text-stone-ink font-sans antialiased; }
 h1, h2, h3 { @apply font-serif; }
+
+/* Texto largo (páginas legales) */
+.prose h2 { @apply mt-12 mb-4 text-3xl text-sea-dark; }
+.prose h3 { @apply mt-8 mb-3 text-2xl text-sea-dark; }
+.prose p, .prose li { @apply mb-4 leading-relaxed text-stone-ink/85; }
+.prose ul { @apply mb-4 list-disc pl-6; }
+.prose ol { @apply mb-4 list-decimal pl-6; }
+.prose a { @apply text-sea underline; }
+.prose table { @apply mb-6 w-full text-sm; }
+.prose td, .prose th { @apply border border-sand-200 p-2 align-top; }
+.prose { overflow-wrap: anywhere; }

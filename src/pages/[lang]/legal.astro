@@ -1,0 +1,13 @@
+---
+import Prose from '../../layouts/Prose.astro';
+import legal from '../../content/legal.es.html?raw';
+import { langPaths, useTranslations } from '../../i18n/ui';
+import type { Lang } from '../../data/hotels';
+
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+---
+<Prose lang={lang} title={t('legal.title')} note={t('legal.onlyEs') || undefined}>
+  <Fragment set:html={legal} />
+</Prose>

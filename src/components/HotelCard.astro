@@ -7,14 +7,17 @@ const { hotel, lang } = Astro.props as { hotel: Hotel; lang: Lang };
 const t = useTranslations(lang);
 ---
 <article class="group overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-sand-200 transition hover:shadow-lg">
-  <a href={`/${lang}/hoteles/${hotel.slug}/`} class="block">
-    <HotelImage hotel={hotel} class="aspect-[4/3] w-full transition duration-500 group-hover:scale-[1.03]" />
+  <a href={`/${lang}/establecimientos/${hotel.slug}/`} class="block">
+    <div class="relative overflow-hidden">
+      <HotelImage hotel={hotel} class="aspect-[4/3] w-full transition duration-500 group-hover:scale-[1.04]" />
+      {hotel.adultsOnly && (
+        <span class="absolute left-3 top-3 rounded-full bg-sand-50/95 px-3 py-1 text-xs font-medium text-sea-dark">{t('hotels.adultsOnly')}</span>
+      )}
+    </div>
     <div class="p-5">
-      <p class="text-xs uppercase tracking-widest text-terracotta">
-        {hotel.location}{hotel.adultsOnly && ` · ${t('hotels.adultsOnly')}`}
-      </p>
+      <p class="text-xs uppercase tracking-widest text-terracotta">{hotel.type[lang]} · {hotel.location}</p>
       <h3 class="mt-1 text-2xl">{hotel.name}</h3>
-      {hotel.tagline && <p class="mt-2 text-sm text-stone-ink/70">{hotel.tagline[lang]}</p>}
+      <p class="mt-2 text-sm text-stone-ink/70">{hotel.tagline[lang]}</p>
       <span class="mt-4 inline-block text-sm font-medium text-sea">{t('cta.discover')} →</span>
     </div>
   </a>

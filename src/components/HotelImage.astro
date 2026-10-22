@@ -1,13 +1,7 @@
 ---
-// Muestra la primera foto del hotel o un marcador mientras no haya fotos.
 import type { Hotel } from '../data/hotels';
-const { hotel, class: className = '' } = Astro.props as { hotel: Hotel; class?: string };
-const src = hotel.images[0];
+interface Props { hotel: Hotel; class?: string; eager?: boolean }
+const { hotel, class: className = '', eager = false } = Astro.props;
 ---
-{src ? (
-  <img src={src} alt={hotel.name} loading="lazy" class={`object-cover ${className}`} />
-) : (
-  <div class={`flex items-center justify-center bg-gradient-to-br from-sea to-terracotta/80 ${className}`}>
-    <span class="font-serif text-2xl text-sand-50/90">{hotel.name}</span>
-  </div>
-)}
+<img src={hotel.images[0]} alt={hotel.name} loading={eager ? 'eager' : 'lazy'} decoding="async"
+     fetchpriority={eager ? 'high' : undefined} class={`object-cover ${className}`} />

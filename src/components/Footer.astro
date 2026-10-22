@@ -1,26 +1,36 @@
 ---
 import { useTranslations } from '../i18n/ui';
-import { hotels, type Lang } from '../data/hotels';
+import { company, hotels, type Lang } from '../data/hotels';
 
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
 ---
 <footer class="mt-24 bg-sea-dark text-sand-100">
-  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-3">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
     <div>
       <p class="font-serif text-2xl">MHR Hotels</p>
-      <p class="mt-2 text-sm text-sand-200">Mallorca</p>
+      <p class="mt-2 text-sm text-sand-200">{t('footer.tagline')}</p>
     </div>
     <ul class="space-y-1 text-sm">
-      {hotels.map((h) => <li><a class="hover:underline" href={`/${lang}/hoteles/${h.slug}/`}>{h.name}</a></li>)}
+      {hotels.map((h) => <li><a class="hover:underline" href={`/${lang}/establecimientos/${h.slug}/`}>{h.name}</a></li>)}
     </ul>
+    <address class="space-y-1 text-sm not-italic">
+      <p>{company.address}</p>
+      <p><a class="hover:underline" href={`mailto:${company.email}`}>{company.email}</a></p>
+      <p><a class="hover:underline" href={`tel:${company.phoneHref}`}>{company.phone}</a></p>
+    </address>
     <ul class="space-y-1 text-sm">
-      <li><a class="hover:underline" href="#">{t('footer.legal')}</a></li>
-      <li><a class="hover:underline" href="#">{t('footer.privacy')}</a></li>
-      <li><a class="hover:underline" href="#">{t('footer.cookies')}</a></li>
+      <li><a class="hover:underline" href={`/${lang}/legal/`}>{t('footer.legal')}</a></li>
+      <li><a class="hover:underline" href={`/${lang}/accesibilidad/`}>{t('footer.a11y')}</a></li>
     </ul>
   </div>
-  <p class="border-t border-white/10 py-5 text-center text-xs text-sand-200">
-    © {new Date().getFullYear()} MHR Hotels. {t('footer.rights')}
-  </p>
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 text-xs text-sand-200 sm:flex-row">
+      <p>© {new Date().getFullYear()} {company.legalName}. {t('footer.rights')}</p>
+      <div class="flex items-center gap-3 rounded bg-white px-3 py-2" title={t('footer.eu')}>
+        <img src="/images/mhr/eu-prtr.png" alt="Plan de Recuperación, Transformación y Resiliencia" width="170" height="60" class="h-9 w-auto" />
+        <img src="/images/mhr/eu-financiado.png" alt={t('footer.eu')} width="150" height="50" class="h-9 w-auto" />
+      </div>
+    </div>
+  </div>
 </footer>
