@@ -4,7 +4,7 @@
 // de gracias o vuelve al formulario con ?error=1.
 
 const TO = 'admin@mhrhotels.com';
-const FROM = 'web@mhrhotels.com';
+const FROM = 'admin@mhrhotels.com';
 const LANGS = ['es', 'en', 'de'];
 
 $lang = in_array($_POST['lang'] ?? '', LANGS, true) ? $_POST['lang'] : 'es';

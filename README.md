@@ -51,6 +51,6 @@ carpeta desde el panel de IONOS (Dominios → Destino), sin tocar el WordPress a
 ## Formulario de propietarios
 
 `public/api/propietarios.php` recibe el formulario y lo envía por email a
-`admin@mhrhotels.com` (constante `TO`) con remitente `web@mhrhotels.com` (`FROM`).
+`admin@mhrhotels.com` (constante `TO`) con remitente `admin@mhrhotels.com` (`FROM`, debe ser un buzón existente del dominio).
 Necesita PHP en el hosting (IONOS lo incluye). Lleva un campo trampa contra bots y
 redirige a `/<idioma>/propietarios/gracias/`.
