@@ -1,7 +1,12 @@
 # Configuración para el servidor Apache (IONOS / 1&1)
 
 ErrorDocument 404 /404.html
-Options -Indexes
+Options -Indexes -MultiViews
+
+# Configuración del formulario: nunca accesible desde la web
+<Files "mhr-form-config.php">
+  Require all denied
+</Files>
 DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>

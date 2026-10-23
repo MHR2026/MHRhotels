@@ -13,10 +13,11 @@ const FROM = 'admin@mhrhotels.com';
 const LANGS = ['es', 'en', 'de'];
 const LOG = __DIR__ . '/errores.log';
 
-// La configuración se busca fuera de la carpeta de la web para que no se borre al
-// subir una versión nueva; como alternativa, junto a este fichero.
+// La configuración se busca, por orden: fuera de la carpeta de la web (no se borra al
+// subir una versión nueva), en la raíz de la web y junto a este fichero.
 function config(): ?array {
-    foreach ([dirname(__DIR__, 2) . '/mhr-form-config.php', __DIR__ . '/config.php'] as $file) {
+    $files = [dirname(__DIR__, 2) . '/mhr-form-config.php', dirname(__DIR__) . '/mhr-form-config.php', __DIR__ . '/config.php'];
+    foreach ($files as $file) {
         if (is_file($file)) {
             $cfg = require $file;
             if (is_array($cfg)) return $cfg;

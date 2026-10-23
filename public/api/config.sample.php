@@ -2,9 +2,8 @@
 // Configuración para enviar el formulario a través del correo de IONOS.
 //
 // 1. Copia este fichero con el nombre  mhr-form-config.php
-// 2. Súbelo a la carpeta que CONTIENE la carpeta de la web (un nivel por encima de
-//    la carpeta del subdominio/dominio), para que no se borre al subir versiones nuevas.
-//    (También funciona como api/config.php, pero se borrará al reemplazar la web.)
+// 2. Súbelo a la carpeta principal de la web (junto a index.html) o, mejor, a la carpeta
+//    que la contiene (un nivel por encima), para que no se borre al subir versiones nuevas.
 // 3. Pon la contraseña del buzón admin@mhrhotels.com.
 // 4. Comprueba que funciona abriendo /api/propietarios.php?check=1
 
